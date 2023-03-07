@@ -1,0 +1,62 @@
+[
+    {
+        "Id": 1, 
+        "Title": "Cold Snap", 
+        "Combination": ["quas", "quas", "quas"], 
+        "Img": "cold-snap"
+    },
+    {
+        "Id": 2, 
+        "Title": "EMP", 
+        "Combination": ["wex", "wex", "wex"], 
+        "Img": "emp"
+    },
+    {
+        "Id": 3, 
+        "Title": "Sunstrike", 
+        "Combination": ["exort", "exort", "exort"], 
+        "Img": "sunstrike"
+    },
+    {
+        "Id": 4, 
+        "Title": "Tornado", 
+        "Combination": ["quas", "wex", "wex"], 
+        "Img": "tornado"
+    },
+    {
+        "Id": 5, 
+        "Title": "Alacrity", 
+        "Combination": ["wex", "wex", "exort"], 
+        "Img": "alacrity"
+    },
+    {
+        "Id": 6, 
+        "Title": "Chaos Meteor", 
+        "Combination": ["wex", "exort", "exort"], 
+        "Img": "chaos-meteor"
+    },
+    {
+        "Id": 7, 
+        "Title": "Ice Wall", 
+        "Combination": ["quas", "quas", "exort"], 
+        "Img": "ice-wall"
+    },
+    {
+        "Id": 8, 
+        "Title": "Forge Spirit", 
+        "Combination": ["quas", "exort", "exort"], 
+        "Img": "forge-spirit"
+    },
+    {
+        "Id": 9, 
+        "Title": "Ghost Walk", 
+        "Combination": ["quas", "quas", "wex"], 
+        "Img": "ghost-walk"
+    },
+    {
+        "Id": 10, 
+        "Title": "Defeaning Blast", 
+        "Combination": ["quas", "wex", "exort"], 
+        "Img": "defeaning-blast"
+    }
+]
