@@ -21,7 +21,7 @@ import SphereIcon from './SphereIcon.vue';
         <div v-if="spell.Id == spellId">
             <div class="popup flex flex-col absolute gap-1 bg-zinc-900 p-2 rounded-lg shadow-md">
                 <p>{{spell.Title}}</p>
-                <div class="px-4 flex flex-row">
+                <div v-if="spell.Id != 0" class="px-4 flex flex-row">
                     <div v-for="i in 3">
                         <SphereIcon v-bind:sphereTitle="spell.Combination[i - 1]"></SphereIcon>
                     </div>

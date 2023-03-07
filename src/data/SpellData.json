@@ -1,5 +1,11 @@
 [
     {
+        "Id": 0, 
+        "Title": "Empty Spell", 
+        "Combination": [], 
+        "Img": "empty"
+    },
+    {
         "Id": 1, 
         "Title": "Cold Snap", 
         "Combination": ["quas", "quas", "quas"], 

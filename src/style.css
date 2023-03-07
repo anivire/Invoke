@@ -7,6 +7,8 @@
   font-stretch: 75% 125%;
 }
 
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -43,12 +45,12 @@ body {
   min-width: 320px;
   min-height: 100vh;
   background-color: #18181b;
-  font-family: sans-serif;
+  font-family: 'IBM Plex Sans', sans-serif;
 }
 
 h1 {
   font-size: 3.2em;
-  line-height: 1.1;
+  line-height: 0.9;
   font-weight: 900;
   font-stretch: 125%;
   font-family: 'Hubot Sans';

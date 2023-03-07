@@ -1,9 +1,10 @@
 <script setup lang="ts">
-    defineProps<{ title: string }>()
+    defineProps<{ title: string, content: string }>()
 </script>
 
 <template>
-    <div class="title-module w-full flex pb-5">
-        <h1 class="">{{title}}</h1>
+    <div class="title-module w-full grid justify-start justify-items-start pb-5">
+        <h1>{{title}}</h1>
+        <p>{{content}}</p>
     </div>
 </template>

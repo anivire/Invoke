@@ -1,5 +1,6 @@
 <script setup lang="ts">
-  import Combo from './components/Combo.vue'
+import Combo from './components/Combo.vue'
+import Queue from './components/SpellQueue.vue';
 import TitleModule from './components/TitleModule.vue';
 </script>
 
@@ -12,7 +13,7 @@ import TitleModule from './components/TitleModule.vue';
       <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
     </a>
   </div>-->
-  <TitleModule title="Invoke Combo"></TitleModule>
+  <TitleModule title="Invoke Combo" content="Select Invoker prokast-combo to try it yourself."></TitleModule>
   
   <div class="combos-container">
     <Combo  title="All spells" 
@@ -20,12 +21,14 @@ import TitleModule from './components/TitleModule.vue';
             avgCastTime="27.68s"
             :isSelected="false" >
     </Combo>
-    <!--<Combo  title="Exort&Quas" 
-            :spellsId="[ 8, 1, 6, 3]"
+    <Combo  title="Exort&Quas" 
+            :spellsId="[ 8, 1, 6, 3, 0, 0, 0, 0, 0, 0]"
             avgCastTime="11.54s"
             :isSelected="false" >
-    </Combo>-->
+    </Combo>
   </div>
+
+  <Queue></Queue>
 </template>
 
 <style scoped>
