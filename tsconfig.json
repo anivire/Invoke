@@ -13,6 +13,6 @@
     "skipLibCheck": true,
     "noEmit": true
   },
-  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"],
+  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue", "src/store/userStore.ts", "src/store/userStore.ts", "src/store/userSettings.ts", "src/store/userSettings.ts"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

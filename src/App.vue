@@ -1,33 +1,23 @@
 <script setup lang="ts">
-import Combo from './components/Combo.vue'
-import Queue from './components/SpellQueue.vue';
-import TitleModule from './components/TitleModule.vue';
+  import Combo from './components/Combo.vue'
+  import Queue from './components/SpellQueue.vue';
+  import TitleModule from './components/TitleModule.vue';
+</script>
+
+<script lang="ts">
+    import comboData from './data/ComboData.json'
+    export default{
+        data() {
+            return {
+              comboData: comboData,
+            };
+        },
+    }
 </script>
 
 <template>
-  <!--<div>
-    <a href="https://vitejs.dev" target="_blank">
-      <img src="/vite.svg" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://vuejs.org/" target="_blank">
-      <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
-    </a>
-  </div>-->
   <TitleModule title="Invoke Combo" content="Select Invoker prokast-combo to try it yourself."></TitleModule>
-  
-  <div class="combos-container">
-    <Combo  title="All spells" 
-            :spellsId="[ 1, 4, 6, 10, 3, 5, 8, 2, 7, 9]"
-            avgCastTime="27.68s"
-            :isSelected="false" >
-    </Combo>
-    <Combo  title="Exort&Quas" 
-            :spellsId="[ 8, 1, 6, 3, 0, 0, 0, 0, 0, 0]"
-            avgCastTime="11.54s"
-            :isSelected="false" >
-    </Combo>
-  </div>
-
+  <Combo></Combo>
   <Queue></Queue>
 </template>
 

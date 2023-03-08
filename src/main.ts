@@ -1,6 +1,13 @@
 import { createApp } from 'vue'
-import './style.css'
 import { autoAnimatePlugin } from '@formkit/auto-animate/vue'
 import App from './App.vue'
+import VueCookies from 'vue-cookies'
+import './style.css'
 
-createApp(App).use(autoAnimatePlugin).mount('#app')
+const app = createApp(App);
+
+app.use(autoAnimatePlugin)
+   .use(VueCookies, { expires: '7d'})
+   .mount('#app')
+
+

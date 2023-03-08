@@ -3,5 +3,5 @@
 </script>
 
 <template>
-    <img :src="sphereTitle + '.png'" v-bind:alt="sphereTitle" class="rounded-full w-8">
+    <img :src="sphereTitle + '.png'" :alt="sphereTitle" class="rounded-full w-8">
 </template>

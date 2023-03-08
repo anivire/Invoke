@@ -4,14 +4,14 @@
 
 <script lang="ts">
     import spellData from '../data/SpellData.json'
-import SphereIcon from './SphereIcon.vue';
+    import SphereIcon from './SphereIcon.vue';
     export default{
-    data() {
-        return {
-            active: false,
-            spellData: spellData
-        };
-    },
+        data() {
+            return {
+                active: false,
+                spellData: spellData
+            };
+        },
     components: { SphereIcon }
 }
 </script>
@@ -23,7 +23,7 @@ import SphereIcon from './SphereIcon.vue';
                 <p>{{spell.Title}}</p>
                 <div v-if="spell.Id != 0" class="px-4 flex flex-row">
                     <div v-for="i in 3">
-                        <SphereIcon v-bind:sphereTitle="spell.Combination[i - 1]"></SphereIcon>
+                        <SphereIcon :sphereTitle="spell.Combination[i - 1]"></SphereIcon>
                     </div>
                 </div>
             </div>
