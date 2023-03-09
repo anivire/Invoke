@@ -22,8 +22,8 @@
 
 <template>
     <div v-for="combo in comboData">    
-        <div class="hover:scale-105 transition ease-out" @click="selectCombo(combo.Id)" >  
-            <div v-if="userSettings.selectedComboId != combo.Id" class="combo-info-container flex flex-row flex-nowrap pl-3 bg-gradient-to-r from-zinc-700/50  border-2 border-zinc-800 transition easy-out p-1 mb-2 rounded-lg">
+        <div @click="selectCombo(combo.Id)" >  
+            <div v-if="userSettings.selectedComboId != combo.Id" class="combo-info-container flex flex-row flex-nowrap pl-3 bg-gradient-to-r from-zinc-700/50 border-2 border-zinc-800 transition easy-out p-1 mb-2 rounded-lg">
                 <p class="pr-5">{{combo.Title}}</p>
                 <p class="pr-5">AVG cast time: <code class="bg-zinc-600/50 px-1">{{combo.AvgCastTime}}</code></p>
                 <p>Your cast time: <code>n/a</code></p>
