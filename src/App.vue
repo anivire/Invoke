@@ -6,8 +6,11 @@
 </script>
 
 <template>
-  <TitleModule title="Invoke Combo" content="Click to select Invoker prokast-combo to try it yourself."></TitleModule>
-  <Combo></Combo>
-  <Queue></Queue>
-  <Timer></Timer>
+  <div class="text-zinc-200">
+    <TitleModule title="Invoke Combo" content="Click to select Invoker prokast-combo to try it yourself."></TitleModule>
+    <Combo></Combo>
+    <Queue></Queue>
+    <Timer></Timer>
+  </div>
+  
 </template>

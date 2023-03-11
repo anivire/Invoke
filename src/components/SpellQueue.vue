@@ -1,30 +1,29 @@
 <script setup lang="ts">
     import { userSettings } from "../store/userSettings";
     import SpellIcon from "./SpellIcon.vue";
+    import SphereQueue from "./SphereQueue.vue";
 </script>
 
 <script lang="ts">
     import comboData from '../data/ComboData.json';
-
+    
     export default{
-        data() {
-            return {
-                comboData: comboData
-            };
-        },
-        methods: {
-            getComboInfo(comboId: number) {
-                userSettings.selectedComboId = comboId;
-            }
+    data() {
+        return {
+            comboData: comboData
+        };
+    },
+    methods: {
+        getComboInfo(comboId: number) {
+            userSettings.selectedComboId = comboId;
         }
-    }
+    },
+    components: { SphereQueue }
+}
 </script>
 
 <template>
     <div class="spell-queue">
-        <!--<img src="quas.png">
-        <img src="wex.png">
-        <img src="exort.png">-->
         <div v-if="userSettings.selectedComboId == 0">
             <p class="pb-5">Selected combo: <code>n/a</code></p>
             <div class="bg-zinc-800 p-3 rounded-lg shadow-md mb-6 w-fit">
@@ -46,6 +45,10 @@
                     </div>
                 </div>
             </div>
+        </div>
+
+        <div class="flex flex-row justify-center gap-2 pb-5">
+           <SphereQueue></SphereQueue>
         </div>
     </div>
 </template>
