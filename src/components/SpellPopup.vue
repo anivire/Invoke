@@ -20,7 +20,8 @@
     <div v-for="spell in spellData">
         <div v-if="spell.Id == spellId">
             <div class="popup flex flex-col absolute gap-1 bg-zinc-900 p-2 rounded-lg shadow-md">
-                <p class="text-amber-500" v-if="spell.Combination[1] == 'exort'">{{spell.Title}}</p>
+                <p class="bg-gradient-to-r from-sky-500 via-fuchsia-500 to-amber-500 bg-clip-text text-transparent" v-if="spell.Id == 10">{{spell.Title}}</p>
+                <p class="text-amber-500" v-else-if="spell.Combination[1] == 'exort'">{{spell.Title}}</p>
                 <p class="text-sky-500" v-else-if="spell.Combination[1] == 'quas'">{{spell.Title}}</p>
                 <p class="text-fuchsia-500" v-else-if="spell.Combination[1] == 'wex'">{{spell.Title}}</p>
                 <p v-else>{{spell.Title}}</p>
