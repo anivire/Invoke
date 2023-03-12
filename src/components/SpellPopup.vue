@@ -1,10 +1,10 @@
 <script setup lang="ts">
+    import spellData from '../data/SpellData.json'
+    import SphereIcon from './SphereIcon.vue';
     defineProps<{ spellId: number }>()
 </script>
 
 <script lang="ts">
-    import spellData from '../data/SpellData.json'
-    import SphereIcon from './SphereIcon.vue';
     export default{
         data() {
             return {

@@ -10,13 +10,10 @@
 </script>
 
 <script lang="ts">
-    
-    
-
-
     export default{
     data() {
         return {
+            userSettings: userSettings,
             comboData: comboData,
             firstSphere: 'empty-sphere',
             secondSphere: 'empty-sphere',
@@ -26,6 +23,22 @@
             secondSpell: 0,
             spellData: spellData
         };
+    },
+    watch: {
+        userSettings: {
+            handler(value) {
+                
+            },
+            deep: true
+        },
+        currentSpell: {
+            handler(value) {
+                if (value == userSettings.selectedCombo.Spells.length) {
+                    userSettings.invokeComboComplete = true;
+                    this.currentSpell = 0;
+                }
+            }
+        }
     },
     created() {
         window.addEventListener('keydown', (event) => {
@@ -49,10 +62,6 @@
         });
     },
     methods: {
-        getComboInfo(comboId: number) {
-            userSettings.selectedComboId = comboId;
-            this.currentSpell = comboData[userSettings.selectedComboId].Spells[0];
-        },
         sphereSet(sphere: string) {
             if (userSettings.isInvokeStarted) {
                 this.thirdSphere = this.secondSphere;
@@ -75,6 +84,9 @@
                             //     console.log('pass')
                             //     this.currentSpell++;
                             // }
+                            if (spellData[i].Id == userSettings.selectedCombo.Spells[this.currentSpell]) {
+                                this.currentSpell++;
+                            }
                         }
                         else {
                             this.firstSpell = spellData[i].Id;
@@ -90,28 +102,22 @@
 
 <template>
     <div class="spell-queue my-5">
-        <div v-if="userSettings.selectedComboId == 0">
+        <div v-if="userSettings.selectedCombo.Id == 0">
             <div>
                 <MessageModule :messageType="MessageType.warn" message="Please select Invoker prokast-combo in panel below to continue."></MessageModule>
             </div>
         </div>
         <div v-else v-for="combo in comboData">
-            <div v-if="combo.Id == userSettings.selectedComboId">
+            <div v-if="combo.Id == userSettings.selectedCombo.Id">
                 <div class="grid grid-cols-2 gap-2 place-items-start pb-5">
                     <div class="flex flex-col place-content-start items-start">
                         <p>Selected combo: <code class="bg-zinc-600/50 px-1">{{combo.Title}}</code></p>
-                        <p>Current spell: 
+                        <p>Invoke spell: 
                             <code :class="(spellData.find(x => x.Id == combo.Spells[currentSpell])?.Combination[1] == 'quas')?'text-sky-500'
                                             :(spellData.find(x => x.Id == combo.Spells[currentSpell])?.Combination[1] == 'wex')?'text-fuchsia-500':'text-amber-500'"
                                 class="px-1 font-bold">{{spellData.find(x => x.Id == combo.Spells[currentSpell])?.Title}}
                             </code>
                         </p>
-                        <!-- <p>Next spell: 
-                            <code :class="(spellData.find(x => x.Id == combo.Spells[1])?.Combination[1] == 'quas')?'text-sky-500'
-                                            :(spellData.find(x => x.Id == combo.Spells[1])?.Combination[1] == 'wex')?'text-fuchsia-500':'text-amber-500'"
-                                class="px-1 font-bold">{{spellData.find(x => x.Id == combo.Spells[1])?.Title}}
-                            </code>
-                        </p> -->
                     </div>
                     <p>Note: select spheres by pressing 
                         <code class="px-1 font-bold text-sky-500 bg-zinc-600/50">Q</code>, 
@@ -132,8 +138,10 @@
                     <SpellIconKey :spellId="11" keyDown="Q"></SpellIconKey>
                     <SpellIconKey :spellId="12" keyDown="W"></SpellIconKey>
                     <SpellIconKey :spellId="13" keyDown="E"></SpellIconKey>
-                    <SpellIconKey :spellId="secondSpell" keyDown=""></SpellIconKey>
-                    <SpellIconKey :spellId="firstSpell" keyDown=""></SpellIconKey>
+                    <SpellIconKey v-if="userSettings.isInvokeStarted" :spellId="secondSpell" keyDown=""></SpellIconKey>
+                    <SpellIconKey v-else :spellId="secondSpell = 0" keyDown=""></SpellIconKey>
+                    <SpellIconKey v-if="userSettings.isInvokeStarted" :spellId="firstSpell" keyDown=""></SpellIconKey>
+                    <SpellIconKey v-else :spellId="firstSpell = 0" keyDown=""></SpellIconKey>
                     <SpellIconKey :spellId="14" keyDown="R"></SpellIconKey>
                 </div>
                 <!-- <div class=" bg-zinc-800 p-3 rounded-lg shadow-md mb-6">

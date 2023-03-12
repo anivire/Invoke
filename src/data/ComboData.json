@@ -2,13 +2,13 @@
     {
         "Id": 1,
         "Title": "All spells",
-        "AvgCastTime": "27.68s",
+        "AvgCastTime": 15308,
         "Spells": [ 1, 4, 6, 10, 3, 5, 8, 2, 7, 9 ]
     },
     {
         "Id": 2,
         "Title": "Quas&Exort",
-        "AvgCastTime": "11.54s",
-        "Spells": [ 8, 1, 6, 3, 0, 0, 0, 0, 0, 0 ]
+        "AvgCastTime": 4390,
+        "Spells": [ 8, 1, 6, 3 ]
     }
 ]

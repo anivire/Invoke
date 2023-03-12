@@ -26,5 +26,4 @@
         v-on:mouseleave="active = false"
         :src="spellData[spellId].Img + '.png'" :alt="spellData[spellId].Title" class="rounded-md w-16 h-16">
     </div>
-    
 </template>

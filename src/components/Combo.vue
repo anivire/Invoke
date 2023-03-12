@@ -1,12 +1,12 @@
 <script setup lang="ts">
     import SpellIcon from "./SpellIcon.vue";
     import { ArrowSmallDownIcon, ArrowSmallUpIcon } from "@heroicons/vue/20/solid";
+    import comboData from '../data/ComboData.json';
+    import { userSettings } from "../store/userSettings";
+    import { Combo } from '../models/Combo'
 </script>
 
 <script lang="ts">
-    import comboData from '../data/ComboData.json';
-    import { userSettings } from "../store/userSettings";
-
     export default{
         data() {
             return {
@@ -15,11 +15,30 @@
             };
         },
         methods: {
-            selectCombo(comboId: number) {
-                userSettings.selectedComboId = comboId;
+            selectCombo(combo: any) {
+                userSettings.selectedCombo = combo;
             },
             isShow() {
                 this.isShowed = !this.isShowed;
+            },
+            format(time: number) {
+                let diffInHrs = time / 3600000;
+                let hh = Math.floor(diffInHrs);
+
+                let diffInMin = (diffInHrs - hh) * 60;
+                let mm = Math.floor(diffInMin);
+
+                let diffInSec = (diffInMin - mm) * 60;
+                let ss = Math.floor(diffInSec);
+
+                let diffInMs = (diffInSec - ss) * 1000;
+                let ms = Math.floor(diffInMs);
+
+                let formattedMM = mm.toString().padStart(2, "0");
+                let formattedSS = ss.toString().padStart(2, "0");
+                let formattedMS = ms.toString().padStart(3, "0");
+
+                return formattedMM == '00' ? `${formattedSS}:${formattedMS}` : `${formattedMM}:${formattedSS}:${formattedMS}`;
             }
         }
     }
@@ -27,7 +46,8 @@
 
 <template>
     <!-- v-auto-animate -->
-    <button class="bg-zinc-800 py-2 rounded-lg shadow-md hover:bg-zinc-600/50 easy-out transition duration-300 flex px-6 mb-5 w-full justify-center" @click="isShow">Toggle list of prokast-combo 
+    <button class="bg-zinc-800 py-2 rounded-lg shadow-md hover:bg-zinc-600/50 easy-out transition duration-300 flex px-6 mb-5 w-full justify-center" @click="isShow">
+        Toggle list of prokast-combo 
         <div v-if="!isShowed">
             <ArrowSmallDownIcon class="h-6 w-6 ml-1"/>
         </div>
@@ -37,17 +57,17 @@
     </button>
     <div v-show="isShowed">
         <div v-for="combo in comboData">    
-            <div @click="selectCombo(combo.Id)">  
+            <div @click="selectCombo(combo)">  
                 <!--ToDO: rewrite class implement-->
-                <div v-if="userSettings.selectedComboId != combo.Id" class="combo-info-container flex flex-row flex-nowrap pl-3 bg-gradient-to-r from-zinc-700/50 border-2 border-zinc-800 transition easy-out p-1 mb-2 rounded-lg">
+                <div v-if="userSettings.selectedCombo.Id != combo.Id" class="combo-info-container flex flex-row flex-nowrap pl-3 bg-gradient-to-r from-zinc-700/50 border-2 border-zinc-800 transition easy-out p-1 mb-2 rounded-lg">
                     <p class="pr-5">{{combo.Title}}</p>
-                    <p class="pr-5">AVG cast time: <code class="bg-zinc-600/50 px-1">{{combo.AvgCastTime}}</code></p>
+                    <p class="pr-5">AVG cast time: <code class="mx-1 bg-zinc-600/50 px-1">{{format(combo.AvgCastTime)}}s</code></p>
                     <p>Your cast time: <code class="bg-zinc-600/50 px-1">n/a</code></p>
                 </div>
 
                 <div v-else class="combo-info-container flex flex-nowrap pl-3 bg-gradient-to-r to-emerald-600/50 from-green-600/25 border-2 border-green-600/25 transition easy-out p-1 mb-2 rounded-lg">
                     <p class="pr-5">{{combo.Title}}</p>
-                    <p class="pr-5">AVG cast time: <code class="bg-zinc-600/50 px-1">{{combo.AvgCastTime}}</code></p>
+                    <p class="pr-5">AVG cast time: <code class="mx-1 bg-zinc-600/50 px-1">{{format(combo.AvgCastTime)}}s</code></p>
                     <p>Your cast time: <code class="bg-zinc-600/50 px-1">n/a</code></p>
                 </div>
 
