@@ -45,7 +45,7 @@
                     if (this.isStarted) {
                         this.timerTime++;
                     }
-                }, 10);
+                }, 100);
             }
         }
     }
@@ -54,7 +54,7 @@
 <template>
     <div class="flex flex-row items-center">
         <div v-if="isStarted" class="grow pr-2 rounded-lg">
-            <p class="bg-gradient-to-r from-green-600/25 to-emerald-600/50 border-2 border-green-600/25 rounded-lg p-1">{{timerTime / 100}}s</p>
+            <p class="bg-gradient-to-r from-green-600/25 to-emerald-600/50 border-2 border-green-600/25 rounded-lg p-1">{{(timerTime % 1000 )/10}}s</p>
         </div>
         <div v-else class="grow pr-2 rounded-lg">
             <p class="bg-gradient-to-r from-zinc-700/50 border-2 border-zinc-800 rounded-lg p-1">Last time: <code class="bg-zinc-600/50 px-1">{{lastTimerTime / 100}}s</code></p>

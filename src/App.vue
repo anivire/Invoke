@@ -5,12 +5,12 @@
 </script>
 
 <template>
-  <div class="text-zinc-200 max-w-3xl">
+  <div class="text-zinc-200 w-max max-w-3xl">
+    <TitleModule title="Invoke" content="Invoke selected combo quickly as possible!"></TitleModule>
+    <Queue></Queue>
+
     <TitleModule title="Select Combo" content="Click to select Invoker prokast-combo to try it yourself."></TitleModule>
     <Combo></Combo>
-  
-    <!-- <TitleModule title="Invoke" content="Invoke selected combo quickly as possible!"></TitleModule> -->
-    <Queue></Queue>
   </div>
   
 </template>

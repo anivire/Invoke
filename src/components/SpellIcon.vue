@@ -18,7 +18,7 @@
 </script>
 
 <template>
-    <div v-for="spell in spellData">
+    <div v-for="spell in spellData" >
         <div v-if="spell.Id == spellId">
             <img v-on:mouseenter="active = true"
             v-on:mouseleave="active = false"

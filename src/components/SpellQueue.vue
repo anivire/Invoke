@@ -2,12 +2,14 @@
     import { userSettings } from "../store/userSettings";
     import SpellIcon from "./SpellIcon.vue";
     import SphereQueue from "./SphereQueue.vue";
+    import MessageModule from "./MessageModule.vue";
     import Timer from './Timer.vue';
 </script>
 
 <script lang="ts">
     import comboData from '../data/ComboData.json';
     import spellData from '../data/SpellData.json'
+    import { MessageType } from '../models/MessageType';
 
     export default{
     data() {
@@ -48,22 +50,22 @@
             this.firstSphere = sphere;
         }
     },
-    components: { SphereQueue }
+    components: { SphereQueue, MessageModule }
 }
 </script>
 
 <template>
-    <div class="spell-queue">
+    <div class="spell-queue my-5">
         <div v-if="userSettings.selectedComboId == 0">
             <div>
-                <p class="pb-5">Select combo to start.</p>
+                <MessageModule :messageType="MessageType.warn" message="Please select Invoker prokast-combo in panel below to continue."></MessageModule>
             </div>
         </div>
         <div v-else v-for="combo in comboData">
             <div v-if="combo.Id == userSettings.selectedComboId">
-                <div class="grid grid-cols-2 gap-2 g-fit place-items-start pb-5">
-                    <div>
-                        <p class="pl-2">Selected combo: <code class="bg-zinc-600/50 px-1">{{combo.Title}}</code></p>
+                <div class="grid grid-cols-2 gap-2 place-items-start pb-5">
+                    <div class="flex flex-col place-content-start items-start">
+                        <p>Selected combo: <code class="bg-zinc-600/50 px-1">{{combo.Title}}</code></p>
                         <p>Current spell: 
                             <code :class="(spellData.find(x => x.Id == combo.Spells[0])?.Combination[1] == 'quas')?'text-sky-500'
                                             :(spellData.find(x => x.Id == combo.Spells[0])?.Combination[1] == 'wex')?'text-fuchsia-500':'text-amber-500'"
