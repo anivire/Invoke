@@ -18,14 +18,10 @@
 </script>
 
 <template>
-    <div v-for="spell in spellData" >
-        <div v-if="spell.Id == spellId">
-            <img v-on:mouseenter="active = true"
-            v-on:mouseleave="active = false"
-            :src="spell.Img + '.png'" :alt="spell.Title" class="rounded-lg transition ease-out hover:scale-105">
-            <div v-show="active">
-                <SpellPopup :spell-id="spell.Id"></SpellPopup>
-            </div>
-        </div>
+    <img v-on:mouseenter="active = true"
+    v-on:mouseleave="active = false"
+    :src="spellData[spellId].Img + '.png'" :alt="spellData[spellId].Title" class="rounded-lg transition ease-out hover:scale-105">
+    <div v-show="active">
+        <SpellPopup :spell-id="spellId"></SpellPopup>
     </div>
 </template>

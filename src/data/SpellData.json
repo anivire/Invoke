@@ -64,5 +64,29 @@
         "Title": "Defeaning Blast", 
         "Combination": ["quas", "wex", "exort"], 
         "Img": "defeaning-blast"
+    },
+    {
+        "Id": 11, 
+        "Title": "Quas", 
+        "Combination": [], 
+        "Img": "quas"
+    },
+    {
+        "Id": 12, 
+        "Title": "Wex", 
+        "Combination": [], 
+        "Img": "wex"
+    },
+    {
+        "Id": 13, 
+        "Title": "Exort", 
+        "Combination": [], 
+        "Img": "exort"
+    },
+    {
+        "Id": 14, 
+        "Title": "Invoke", 
+        "Combination": [], 
+        "Img": "invoke"
     }
 ]

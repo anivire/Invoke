@@ -1,9 +1,9 @@
 <script setup lang="ts">
     import { StopCircleIcon, PlayCircleIcon } from "@heroicons/vue/20/solid";
-import { render } from "vue";
+    import { userSettings } from "../store/userSettings";
 </script>
 
-<script lang="ts">
+<script lang="ts">  
     export default {
         data() {
             return {
@@ -22,14 +22,24 @@ import { render } from "vue";
                 }
             }
         },
+        created() {
+            window.addEventListener('keydown', (event) => {
+                if (event.code == 'Enter') {
+                    if (!this.isStarted) { this.startTimer(); }
+                    else { this.stopTimer(); }
+                }
+            });
+        },
         methods: {
             startTimer() {
                 this.isStarted = true;
+                userSettings.isInvokeStarted = true;
                 this.startTime = Date.now();
                 this.render();
             },
             stopTimer() {
                 this.isStarted = false;
+                userSettings.isInvokeStarted = false;
                 this.lastTimerTime = this.elapsedTime;
                 this.elapsedTime = 0;
             },
@@ -50,7 +60,7 @@ import { render } from "vue";
                 let formattedSS = ss.toString().padStart(2, "0");
                 let formattedMS = ms.toString().padStart(3, "0");
 
-                return `${formattedMM}:${formattedSS}:${formattedMS}`;
+                return formattedMM == '00' ? `${formattedSS}:${formattedMS}` : `${formattedMM}:${formattedSS}:${formattedMS}`;
             },
             render() {
                 setTimeout(() => {
@@ -66,10 +76,10 @@ import { render } from "vue";
 <template>
     <div class="flex flex-row items-center">
         <div v-if="isStarted" class="grow pr-2 rounded-lg">
-            <p class="bg-gradient-to-r from-green-600/25 to-emerald-600/50 border-2 border-green-600/25 rounded-lg p-1">{{format(elapsedTime)}}s</p>
+            <p class="bg-gradient-to-r from-green-600/25 to-emerald-600/50 border-2 border-green-600/25 rounded-lg p-1">{{format(elapsedTime)}}</p>
         </div>
         <div v-else class="grow pr-2 rounded-lg">
-            <p class="bg-gradient-to-r from-zinc-700/50 border-2 border-zinc-800 rounded-lg p-1">Last time: <code class="bg-zinc-600/50 px-1">{{format(lastTimerTime)}}s</code></p>
+            <p class="bg-gradient-to-r from-zinc-700/50 border-2 border-zinc-800 rounded-lg p-1">Last time: <code class="bg-zinc-600/50 px-1">{{format(lastTimerTime)}}</code></p>
         </div>
         <button v-if="!isStarted" class="bg-zinc-800 py-2 rounded-lg shadow-md hover:bg-emerald-600/50 easy-out transition duration-300 flex px-6" @click="startTimer()"><PlayCircleIcon class="h-6 w-6 mr-1"></PlayCircleIcon>Click here or press <code class="mx-1 bg-zinc-600/50 px-1">Enter</code> to start</button>
         <button v-else class="bg-zinc-800 py-2 rounded-lg shadow-md hover:bg-rose-600/50 easy-out transition duration-300 flex px-6" @click="stopTimer()"><StopCircleIcon class="h-6 w-6 mr-1"></StopCircleIcon>Cancel</button>
