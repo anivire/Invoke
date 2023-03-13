@@ -45,7 +45,6 @@
 </script>
 
 <template>
-    <!-- v-auto-animate -->
     <button class="bg-zinc-800 py-2 rounded-lg shadow-md hover:bg-zinc-600/50 easy-out transition duration-300 flex px-6 mb-5 w-full justify-center" @click="isShow">
         Toggle list of prokast-combo 
         <div v-if="!isShowed">
@@ -58,14 +57,7 @@
     <div v-show="isShowed">
         <div v-for="combo in comboData">    
             <div @click="selectCombo(combo)">  
-                <!--ToDO: rewrite class implement-->
-                <div v-if="userSettings.selectedCombo.Id != combo.Id" class="combo-info-container flex flex-row flex-nowrap pl-3 bg-gradient-to-r from-zinc-700/50 border-2 border-zinc-800 transition easy-out p-1 mb-2 rounded-lg">
-                    <p class="pr-5">{{combo.Title}}</p>
-                    <p class="pr-5">AVG cast time: <code class="mx-1 bg-zinc-600/50 px-1">{{format(combo.AvgCastTime)}}s</code></p>
-                    <p>Your cast time: <code class="bg-zinc-600/50 px-1">n/a</code></p>
-                </div>
-
-                <div v-else class="combo-info-container flex flex-nowrap pl-3 bg-gradient-to-r to-emerald-600/50 from-green-600/25 border-2 border-green-600/25 transition easy-out p-1 mb-2 rounded-lg">
+                <div :class="(userSettings.selectedCombo.Id != combo.Id)?'from-zinc-700/50 border-zinc-800':'to-emerald-600/50 from-green-600/25 border-green-600/25'" class="combo-info-container flex flex-row flex-nowrap pl-3 bg-gradient-to-r border-2 p-1 mb-2 rounded-lg">
                     <p class="pr-5">{{combo.Title}}</p>
                     <p class="pr-5">AVG cast time: <code class="mx-1 bg-zinc-600/50 px-1">{{format(combo.AvgCastTime)}}s</code></p>
                     <p>Your cast time: <code class="bg-zinc-600/50 px-1">n/a</code></p>

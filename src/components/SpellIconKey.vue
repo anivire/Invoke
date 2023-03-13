@@ -4,7 +4,7 @@
 
 <script lang="ts">
     import spellData from '../data/SpellData.json'
-    import SpellPopup from './SpellPopup.vue';
+    import SpellPopup from './SpellPopover.vue';
     
     export default{
         data() {
