@@ -22,8 +22,6 @@
         <div class="absolute bg-zinc-800 px-2 text-sm m-1 shadow-lg rounded-md">
             <code class="">{{keyDown}}</code>
         </div>
-        <img v-on:mouseenter="active = true"
-        v-on:mouseleave="active = false"
-        :src="spellData[spellId].Img + '.png'" :alt="spellData[spellId].Title" class="rounded-md w-16 h-16">
+        <img v-on:mouseenter="active = true" v-on:mouseleave="active = false" :src="spellData[spellId].Img + '.png'" class="rounded-md w-16 h-16">
     </div>
 </template>

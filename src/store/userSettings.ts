@@ -5,5 +5,6 @@ export const userSettings = reactive({
    selectedCombo: new Combo(0, '', 0, []),
    isInvokeStarted: false,
    invokeComboComplete: false,
-   lastTime: 0
+   lastTime: 0,
+   lastTryExecution: [0, 0]
 })

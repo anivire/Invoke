@@ -1,0 +1,14 @@
+[
+ {
+    "Id": 0,
+    "Title": "Classic",
+    "Content": "Invoke all 10 spells as fast as you can",
+    "ComboId": 0
+ },
+ {
+    "Id": 1,
+    "Title": "Survival",
+    "Content": "Hold out for as long as you can until you make a mistake",
+    "ComboId": 1
+ }
+]

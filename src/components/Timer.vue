@@ -98,10 +98,9 @@
         </div>
         <div v-else class="grow pr-2 rounded-lg">
             <p class="bg-gradient-to-r from-zinc-700/50 border-2 border-zinc-800 rounded-lg p-1">
-                Last time: 
+                Result: 
                 <code v-if="isCanceled" class="bg-rose-600/25 px-1">canceled</code>
-                <code v-else class="bg-zinc-600/50 px-1">{{format(userSettings.lastTime)}}s
-                </code>
+                <code v-else class="bg-zinc-600/50 px-1">{{format(userSettings.lastTime)}}s {{userSettings.lastTryExecution[0] != 0 || userSettings.lastTryExecution[1] != 0 ? (userSettings.lastTryExecution[0] / (userSettings.lastTryExecution[0] + userSettings.lastTryExecution[1]) * 100).toFixed(0) : 100}}%</code>
             </p>
         </div>
         <button v-if="!isStarted" class="bg-zinc-800 py-2 rounded-lg shadow-md hover:bg-emerald-600/50 easy-out transition duration-300 flex px-6" @click="startTimer()">

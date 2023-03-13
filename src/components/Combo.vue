@@ -1,9 +1,8 @@
 <script setup lang="ts">
     import SpellIcon from "./SpellIcon.vue";
-    import { ArrowSmallDownIcon, ArrowSmallUpIcon } from "@heroicons/vue/20/solid";
+    import { ArrowSmallDownIcon } from "@heroicons/vue/20/solid";
     import comboData from '../data/ComboData.json';
     import { userSettings } from "../store/userSettings";
-    import { Combo } from '../models/Combo'
 </script>
 
 <script lang="ts">
@@ -17,6 +16,7 @@
         methods: {
             selectCombo(combo: any) {
                 userSettings.selectedCombo = combo;
+                console.log(userSettings)
             },
             isShow() {
                 this.isShowed = !this.isShowed;
@@ -47,17 +47,12 @@
 <template>
     <button class="bg-zinc-800 py-2 rounded-lg shadow-md hover:bg-zinc-600/50 easy-out transition duration-300 flex px-6 mb-5 w-full justify-center" @click="isShow">
         Toggle list of prokast-combo 
-        <div v-if="!isShowed">
-            <ArrowSmallDownIcon class="h-6 w-6 ml-1"/>
-        </div>
-        <div v-else>
-            <ArrowSmallUpIcon class="h-6 w-6 ml-1"/>
-        </div>
+        <ArrowSmallDownIcon :class="(isShowed)?'rotate-180 transform':''" class="h-6 w-6 ml-1 transition duration-300 easy-out"/>
     </button>
-    <div v-show="isShowed">
+    <div v-if="isShowed">
         <div v-for="combo in comboData">    
-            <div @click="selectCombo(combo)">  
-                <div :class="(userSettings.selectedCombo.Id != combo.Id)?'from-zinc-700/50 border-zinc-800':'to-emerald-600/50 from-green-600/25 border-green-600/25'" class="combo-info-container flex flex-row flex-nowrap pl-3 bg-gradient-to-r border-2 p-1 mb-2 rounded-lg">
+            <div class="prokast-combo" @click="selectCombo(combo)">  
+                <div :class="(userSettings.selectedCombo.Id != combo.Id)?'from-zinc-700/50 border-zinc-800':'to-emerald-600/50 from-green-600/25 border-green-600/25'" class="combo-info-container transition duration-300 flex flex-row flex-nowrap pl-3 bg-gradient-to-r border-2 p-1 mb-2 rounded-lg">
                     <p class="pr-5">{{combo.Title}}</p>
                     <p class="pr-5">AVG cast time: <code class="mx-1 bg-zinc-600/50 px-1">{{format(combo.AvgCastTime)}}s</code></p>
                     <p>Your cast time: <code class="bg-zinc-600/50 px-1">n/a</code></p>
@@ -66,7 +61,7 @@
                 <div class=" bg-zinc-800 p-3 rounded-lg shadow-md mb-6">
                     <div class="spells-container flex flex-nowrap gap-3">
                         <div v-for="id in combo.Spells">
-                            <SpellIcon :spellId="id" v-auto-animate></SpellIcon>
+                            <SpellIcon :spellId="id"></SpellIcon>
                         </div>
                     </div>
                 </div>
