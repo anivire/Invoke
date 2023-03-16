@@ -1,10 +1,11 @@
 import { reactive } from 'vue'
-import { Combo } from '../models/Combo'
+import { Mode } from '../models/Mode'
+import { ModeType } from '../models/ModeType'
 
 export const userSettings = reactive({
-   selectedCombo: new Combo(0, '', 0, []),
+   selectedMode: new Mode(ModeType.Unset, '', ''),
    isInvokeStarted: false,
-   invokeComboComplete: false,
-   lastTime: 0,
-   lastTryExecution: [0, 0]
+   isInvokeComplete: false,
+   lastInvokeTime: 0,
+   lastInvokeExecution: [0, 0]
 })

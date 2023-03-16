@@ -1,8 +1,9 @@
+import { ModeType } from "./ModeType";
+
 export class Mode {
     constructor(
-       public Id: number,
+       public ModeType: ModeType,
        public Title: string,
-       public Content: string,
-       public ComboId: number
+       public Content: string
     ){}
 }
