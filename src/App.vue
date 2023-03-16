@@ -1,5 +1,4 @@
 <script setup lang="ts">
-  import Combo from './components/Combo.vue'
   import ModeInfo from './components/ModeInfo.vue';
   import Queue from './components/SpellQueue.vue';
   import SpellVitrine from './components/SpellVitrine.vue';
