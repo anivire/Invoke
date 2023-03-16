@@ -86,39 +86,6 @@
         };
     },
     watch: {
-        // currentSpell: {
-        //     handler(value) {
-        //         if (userSettings.selectedMode.ModeType == ModeType.Survival) {
-        //             switch(survivalSettings.difficultyLvl) {
-        //                 case 1: {
-        //                     survivalSettings.maxInvokeTime = 5;
-        //                     if (this.currentSpell >= 15) {
-        //                         survivalSettings.difficultyLvl++;
-        //                     }
-        //                     break;
-        //                 }
-        //                 case 2: {
-        //                     survivalSettings.maxInvokeTime = 4;
-        //                     if (this.currentSpell >= 30) {
-        //                         survivalSettings.difficultyLvl++;
-        //                     }
-        //                     break;
-        //                 }
-        //                 case 3: {
-        //                     survivalSettings.maxInvokeTime = 3;
-        //                     if (this.currentSpell >= 45) {
-        //                         survivalSettings.difficultyLvl++;
-        //                     }
-        //                     break;
-        //                 }
-        //                 case 4: {
-        //                     survivalSettings.maxInvokeTime = 2;
-        //                     break;
-        //                 }
-        //             }
-        //         }
-        //     }
-        // },
         userSettings: {
             handler(value) {
                 if (!userSettings.isInvokeStarted) {
@@ -232,6 +199,39 @@
                                         survivalSettings.invokedSpell = true;
                                         this.correctSpells++;
                                         userSettings.lastInvokeExecution = [this.correctSpells, this.invalidSpells];
+
+                                        switch(survivalSettings.difficultyLvl) {
+                                            case 1: {
+                                                survivalSettings.maxInvokeTime = 5;
+                                                if (this.correctSpells >= 14) {
+                                                    survivalSettings.difficultyLvl++;
+                                                }
+                                                break;
+                                            }
+                                            case 2: {
+                                                survivalSettings.maxInvokeTime = 4;
+                                                if (this.correctSpells >= 29) {
+                                                    survivalSettings.difficultyLvl++;
+                                                }
+                                                break;
+                                            }
+                                            case 3: {
+                                                survivalSettings.maxInvokeTime = 3;
+                                                if (this.correctSpells >= 44) {
+                                                    survivalSettings.difficultyLvl++;
+                                                }
+                                                break;
+                                            }
+                                            case 4: {
+                                                survivalSettings.maxInvokeTime = 2;
+                                                break;
+                                            }
+                                            default: {
+                                                survivalSettings.maxInvokeTime = 5;
+                                            }
+                                        }
+
+                                        console.log('survivalSettings.difficultyLvl: ' + survivalSettings.difficultyLvl)
                                     }
                                     else {
                                         this.invalidSpells++;

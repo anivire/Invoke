@@ -30,9 +30,9 @@
     <div v-if="userSettings.selectedMode.ModeType == ModeType.Survival" class="survival-timer-bar mt-3">
         <div class="width-full bg-zinc-900 rounded-md border-4 border-zinc-800">
             <div :style="'width: ' + survivalRemainingTime / survivalMaxReminingTime * 100 + '%'" 
-                 :class="(survivalRemainingTime / survivalMaxReminingTime * 100) >= 85 ? 'from-green-600 to-emerald-600 p-1'
-                        :(survivalRemainingTime / survivalMaxReminingTime * 100) >= 50 ? 'from-orange-600 to-amber-600 p-1'
-                        :'from-rose-600 to-red-600 py-1'"
+                 :class="(survivalRemainingTime / survivalMaxReminingTime * 100) >= 85 ? 'from-green-600 to-emerald-600 p-2'
+                        :(survivalRemainingTime / survivalMaxReminingTime * 100) >= 50 ? 'from-orange-600 to-amber-600 p-2'
+                        :'from-rose-600 to-red-600 py-2'"
                   class="bg-gradient-to-r transition-all duration-300 ease-in-out rounded-md">
             </div>
         </div>
@@ -58,6 +58,7 @@
                 startTime: 0,
                 elapsedTime: 0,
 
+                isSurvivalStarted: false,
                 survivalRemainingTime: 0,
                 survivalMaxReminingTime: survivalSettings.maxInvokeTime,
                 survivalTimerId: 0,
@@ -83,16 +84,18 @@
                 handler(value) {
                     if (userSettings.isInvokeStarted && survivalSettings.invokedSpell) {
                         survivalSettings.invokedSpell = false;
+                        this.survivalMaxReminingTime = survivalSettings.maxInvokeTime;
                         this.survivalRemainingTime = survivalSettings.maxInvokeTime;
-                        window.clearTimeout(this.survivalTimerId)
                     }
+
+                    console.log('this.survivalMaxReminingTime: ' + this.survivalMaxReminingTime)
                 },
                 deep: true
             },
             survivalRemainingTime: {
                 handler(value) {
                     //console.log(this.survivalRemainingTime)
-                    this.renderSurvival();
+                    //this.renderSurvival();
 
                     if (this.survivalRemainingTime == 0) {
                         this.completeTimer();
@@ -120,6 +123,7 @@
             startTimer() {
                 if (userSettings.selectedMode.ModeType == ModeType.Survival) {
                     this.survivalRemainingTime = survivalSettings.maxInvokeTime;
+                    this.renderSurvival();
                 }
 
                 userSettings.isInvokeStarted = true;
@@ -130,8 +134,11 @@
             },
             stopTimer() {
                 if (userSettings.selectedMode.ModeType == ModeType.Survival) {
+                    survivalSettings.difficultyLvl = 1;
+                    survivalSettings.maxInvokeTime = 5;
                     this.survivalRemainingTime = 0;
                     this.survivalMaxReminingTime = survivalSettings.maxInvokeTime;
+                    window.clearInterval(this.survivalTimerId)
                 }
 
                 userSettings.isInvokeComplete = false;
@@ -142,9 +149,12 @@
             },
             completeTimer() {
                 if (userSettings.selectedMode.ModeType == ModeType.Survival) {
+                    survivalSettings.difficultyLvl = 1;
+                    survivalSettings.maxInvokeTime = 5;
                     this.survivalRemainingTime = 0;
                     this.survivalMaxReminingTime = survivalSettings.maxInvokeTime;
                     survivalSettings.isCompleted = true;
+                    window.clearInterval(this.survivalTimerId)
                 }
 
                 userSettings.isInvokeComplete = false;
@@ -180,7 +190,7 @@
                 }, 10);
             },
             renderSurvival() {
-                this.survivalTimerId = setTimeout(() => {
+                this.survivalTimerId = setInterval(() => {
                     if (userSettings.isInvokeStarted) {
                         this.survivalRemainingTime--;
                     }
