@@ -26,7 +26,10 @@
     export default{
         methods: {
             selectMode(mode: Mode) {
-                if (!userSettings.isInvokeStarted) { userSettings.selectedMode = mode; }
+                if (!userSettings.isInvokeStarted) { 
+                    userSettings.selectedMode = mode;
+                    document.title = userSettings.selectedMode.ModeType == ModeType.Classic ? 'Classic mode › Invoke' : 'Survival mode › Invoke'
+                }
             }
         }
     }
