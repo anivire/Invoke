@@ -1,6 +1,6 @@
 <template>
     <div class="spell-queue">
-        <MessageModule v-if="userSettings.selectedMode.ModeType == ModeType.Unset" :messageType="MessageType.warn" message="Please select mode in panel below to continue."></MessageModule>
+        <MessageModule v-if="userSettings.selectedMode.ModeType == ModeType.Unset" :messageType="MessageType.warn" message="Please select mode to continue."></MessageModule>
         <div v-else class="mb-5 bg-zinc-800 p-5 rounded-lg shadow-md border-2 border-zinc-700/50">
             <div class="grid grid-cols-2 gap-2 place-items-start pb-5">
                 <div class="flex flex-col place-content-start items-start">
