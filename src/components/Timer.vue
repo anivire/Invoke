@@ -1,32 +1,34 @@
 <template>
     <div class="flex flex-row items-center">
         <div v-if="isStarted" class="grow pr-2 rounded-lg">
-            <p class="bg-gradient-to-r from-green-600/25 to-emerald-600/50 border-2 border-green-600/25 rounded-lg p-1">{{format(elapsedTime)}}s</p>
+            <p v-if="userSettings.selectedMode.ModeType == ModeType.Survival" class="bg-gradient-to-r from-green-600/25 to-emerald-600/50 border-2 border-green-600/25 rounded-lg p-1">{{format(elapsedTime)}}s / Level {{survivalSettings.difficultyLvl}}: {{survivalRemainingTime}}s</p>
+            <p v-else class="bg-gradient-to-r from-green-600/25 to-emerald-600/50 border-2 border-emerald-500/50 rounded-lg p-1">{{format(elapsedTime)}}s</p>
         </div>
 
         <div v-else class="grow pr-2 rounded-lg">
-            <p class="bg-gradient-to-r from-zinc-700/50 border-2 border-zinc-800 rounded-lg p-1">Result: 
-                <code v-if="isCanceled" class="bg-rose-600/25 px-1">canceled</code>
+            <p v-if="isCanceled" class="bg-gradient-to-r from-zinc-900 bg-zinc-900/50 border-2 border-zinc-800 rounded-lg p-2">Result:
+                <code class="bg-rose-600/25 px-1">canceled</code> 
+            </p>
+            <p v-else class="bg-gradient-to-r from-zinc-900 bg-zinc-900/50 border-2 border-zinc-800 rounded-lg p-2">Result: 
                 <code class="bg-zinc-600/50 px-1">{{format(userSettings.lastInvokeTime)}}s</code> <code class="bg-emerald-600/50 px-1">{{ userSettings.lastInvokeExecution[0] }}</code> /
                 <code class="bg-rose-600/50 px-1">{{ userSettings.lastInvokeExecution[1] }}</code> /
                 <code class="bg-zinc-600/50 px-1">{{ getExecutionPercent() }}</code>
             </p>
         </div>
 
-        <button v-if="!isStarted" class="bg-zinc-800 py-2 rounded-lg shadow-md hover:bg-emerald-600/50 easy-out transition duration-300 flex px-6" @click="startTimer()">
+        <button v-if="!isStarted" class="bg-zinc-900 py-2 rounded-lg shadow-md hover:bg-emerald-600/50 easy-out transition duration-300 flex px-6" @click="startTimer()">
             <PlayCircleIcon class="h-6 w-6 mr-1"></PlayCircleIcon>
             Click here or press 
             <code class="mx-1 bg-zinc-600/50 px-1">Enter</code> to start
         </button>
         
-        <button v-else class="bg-zinc-800 py-2 rounded-lg shadow-md hover:bg-rose-600/50 easy-out transition duration-300 flex px-6" @click="stopTimer()">
+        <button v-else class="bg-zinc-900 py-2 rounded-lg shadow-md hover:bg-rose-600/50 easy-out transition duration-300 flex px-6" @click="stopTimer()">
             <StopCircleIcon class="h-6 w-6 mr-1"></StopCircleIcon>Cancel
         </button>
     </div>
 
-    <!-- <p class="mt-3">Remaining time: <code class="mx-1 bg-zinc-600/50 px-1">{{survivalRemainingTime}}s</code></p> -->
-    <div v-if="userSettings.selectedMode.ModeType == ModeType.Survival" class="survival-timer-bar my-3">
-        <div class="width-full bg-zinc-900 rounded-md border-4 border-zinc-800 shadow-md">
+    <div v-if="userSettings.selectedMode.ModeType == ModeType.Survival" class="survival-timer-bar mt-3">
+        <div class="width-full bg-zinc-900 rounded-md border-4 border-zinc-800">
             <div :style="'width: ' + survivalRemainingTime / survivalMaxReminingTime * 100 + '%'" 
                  :class="(survivalRemainingTime / survivalMaxReminingTime * 100) >= 85 ? 'from-green-600 to-emerald-600 p-1'
                         :(survivalRemainingTime / survivalMaxReminingTime * 100) >= 50 ? 'from-orange-600 to-amber-600 p-1'
@@ -179,9 +181,9 @@
             },
             renderSurvival() {
                 this.survivalTimerId = setTimeout(() => {
-                    if (userSettings.isInvokeStarted) {
+                    //if (userSettings.isInvokeStarted) {
                         this.survivalRemainingTime--;
-                    }
+                    //}
                 }, 1000);
             }
         }

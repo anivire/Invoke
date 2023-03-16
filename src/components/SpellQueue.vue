@@ -1,7 +1,7 @@
 <template>
-    <div class="spell-queue my-5">
+    <div class="spell-queue">
         <MessageModule v-if="userSettings.selectedMode.ModeType == ModeType.Unset" :messageType="MessageType.warn" message="Please select mode in panel below to continue."></MessageModule>
-        <div v-else>
+        <div v-else class="my-5 bg-zinc-800 p-5 rounded-lg shadow-md border-2 border-zinc-700/50">
             <div class="grid grid-cols-2 gap-2 place-items-start pb-5">
                 <div class="flex flex-col place-content-start items-start">
                     <p>Selected mode: <code class="bg-zinc-600/50 px-1">{{modeData[userSettings.selectedMode.ModeType].Title}}</code></p>
@@ -88,8 +88,6 @@
     watch: {
         userSettings: {
             handler(value) {
-                this.initMode();
-
                 if (!userSettings.isInvokeStarted) {
                     // Reset variables after Invoke ended
                     this.correctSpells = 0;
@@ -98,6 +96,10 @@
                     this.firstSphere = 'empty-sphere';
                     this.secondSphere = 'empty-sphere';
                     this.thirdSphere = 'empty-sphere';
+                }
+                
+                if (userSettings.selectedMode.ModeType == ModeType.Survival){
+                    this.initMode();
                 }
             },
             deep: true
@@ -147,13 +149,13 @@
         },
         spellGenerator() {
             let generatedNumber = 0;
+            let prevSpell = this.currentSpell
             
             do {
                 generatedNumber = Math.floor(Math.random() * 10) + 1;
-            } while (this.currentSpell == generatedNumber );
+            } while (this.currentSpell == generatedNumber && this.currentSpell == prevSpell);
 
             this.currentSpell = generatedNumber;
-            console.log(this.currentSpell)
         },
         checkSpell() {
             // Check empty spheres
@@ -170,7 +172,6 @@
                             switch (userSettings.selectedMode.ModeType) {
                                 case ModeType.Classic: {
                                     if (spellData[i].Id == this.classicModeSpells[this.currentSpell]) {
-                                        
                                         this.correctSpells++;
                                         this.currentSpell++;
 
@@ -197,7 +198,8 @@
                                     if (spellData[i].Id == this.currentSpell) {
                                         survivalSettings.invokedSpell = true;
                                         userSettings.lastInvokeExecution = [this.correctSpells, this.invalidSpells];
-                                        this.currentSpell++;
+                                        //this.spellGenerator();
+                                        
                                         this.correctSpells++;
                                     }
                                     else {
