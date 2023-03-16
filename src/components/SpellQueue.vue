@@ -1,7 +1,7 @@
 <template>
     <div class="spell-queue">
         <MessageModule v-if="userSettings.selectedMode.ModeType == ModeType.Unset" :messageType="MessageType.warn" message="Please select mode in panel below to continue."></MessageModule>
-        <div v-else class="my-5 bg-zinc-800 p-5 rounded-lg shadow-md border-2 border-zinc-700/50">
+        <div v-else class="mb-5 bg-zinc-800 p-5 rounded-lg shadow-md border-2 border-zinc-700/50">
             <div class="grid grid-cols-2 gap-2 place-items-start pb-5">
                 <div class="flex flex-col place-content-start items-start">
                     <p>Selected mode: <code class="bg-zinc-600/50 px-1">{{modeData[userSettings.selectedMode.ModeType].Title}}</code></p>
@@ -86,6 +86,39 @@
         };
     },
     watch: {
+        // currentSpell: {
+        //     handler(value) {
+        //         if (userSettings.selectedMode.ModeType == ModeType.Survival) {
+        //             switch(survivalSettings.difficultyLvl) {
+        //                 case 1: {
+        //                     survivalSettings.maxInvokeTime = 5;
+        //                     if (this.currentSpell >= 15) {
+        //                         survivalSettings.difficultyLvl++;
+        //                     }
+        //                     break;
+        //                 }
+        //                 case 2: {
+        //                     survivalSettings.maxInvokeTime = 4;
+        //                     if (this.currentSpell >= 30) {
+        //                         survivalSettings.difficultyLvl++;
+        //                     }
+        //                     break;
+        //                 }
+        //                 case 3: {
+        //                     survivalSettings.maxInvokeTime = 3;
+        //                     if (this.currentSpell >= 45) {
+        //                         survivalSettings.difficultyLvl++;
+        //                     }
+        //                     break;
+        //                 }
+        //                 case 4: {
+        //                     survivalSettings.maxInvokeTime = 2;
+        //                     break;
+        //                 }
+        //             }
+        //         }
+        //     }
+        // },
         userSettings: {
             handler(value) {
                 if (!userSettings.isInvokeStarted) {
@@ -97,8 +130,7 @@
                     this.secondSphere = 'empty-sphere';
                     this.thirdSphere = 'empty-sphere';
                 }
-                
-                if (userSettings.selectedMode.ModeType == ModeType.Survival){
+                else {
                     this.initMode();
                 }
             },
@@ -132,6 +164,7 @@
                 case ModeType.Classic: {
                     // Shuffle spell array after selecting it
                     this.classicModeSpells.sort(() => Math.random() - 0.5);
+                    console.log(this.classicModeSpells)
                     break;
                 }
                 case ModeType.Survival: {
@@ -197,10 +230,8 @@
                                 case ModeType.Survival: {
                                     if (spellData[i].Id == this.currentSpell) {
                                         survivalSettings.invokedSpell = true;
-                                        userSettings.lastInvokeExecution = [this.correctSpells, this.invalidSpells];
-                                        //this.spellGenerator();
-                                        
                                         this.correctSpells++;
+                                        userSettings.lastInvokeExecution = [this.correctSpells, this.invalidSpells];
                                     }
                                     else {
                                         this.invalidSpells++;

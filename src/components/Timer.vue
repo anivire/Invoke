@@ -91,9 +91,9 @@
             },
             survivalRemainingTime: {
                 handler(value) {
-                    if (this.isStarted && this.survivalRemainingTime != 0) {
-                        this.renderSurvival();
-                    }
+                    //console.log(this.survivalRemainingTime)
+                    this.renderSurvival();
+
                     if (this.survivalRemainingTime == 0) {
                         this.completeTimer();
                     }
@@ -181,9 +181,9 @@
             },
             renderSurvival() {
                 this.survivalTimerId = setTimeout(() => {
-                    //if (userSettings.isInvokeStarted) {
+                    if (userSettings.isInvokeStarted) {
                         this.survivalRemainingTime--;
-                    //}
+                    }
                 }, 1000);
             }
         }
